@@ -1,0 +1,7 @@
+html, body {
+    margin: 0;
+    overflow: hidden;
+  }
+  #game-screen {
+    background: radial-gradient(rgb(230, 231, 230), rgb(223, 226, 223));
+  }
