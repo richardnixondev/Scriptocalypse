@@ -12,10 +12,10 @@ _MVP definition here, list of minimum features_
 
 ## Backlog
 
-Adding hardcore state to make the game more difficult
-Adding different types of creatures
-Adding a boss fight when a time is reached.
-Adding music and sound in the game.
+- Add hardcore state to make the game more difficult
+- Add different types of creatures
+- Add a boss fight when a time is reached.
+- Add music and sound in the game.
 
 
 
