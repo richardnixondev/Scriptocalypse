@@ -6,8 +6,24 @@
 Scriptocalypse, set in a zombie apocalypse scenario in the year 2666, the objective is to survive the attack of all groups of zombies for 3 minutes. The game ends when the clock resets, your score will be based on the amount of destruction you managed to cause.
 
 
-## MVP
-_MVP definition here, list of minimum features_
+## MVP - (Minimum Scope)
+- The game must have at least 3 states (initial start screen, game screen, and game over screen)
+
+- The game must have the ability to start and be restarted at the end.
+
+- The game needs to have a logic of losing and winning.
+
+- The game needs to be versioned on github.
+
+-----------------------------------------------------------------------------
+## Extras
+- The game may have a local storage function.
+
+- The game may have audio.
+
+- The game may have a variety of enemies.
+
+- The game may have BOSS-type enemies.
 
 
 ## Backlog
@@ -24,9 +40,9 @@ _List of classes and methods_
 
 
 ## States y States Transitions
-Start Screen
-Game Screen
-Game Over Screen
+ - Start Screen
+-  Game Screen
+-  Game Over Screen
 
 
 ## Task
