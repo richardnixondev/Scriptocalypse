@@ -1,4 +1,7 @@
-#game-screen {
+#gameArea {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
     background: radial-gradient(rgb(230, 231, 230), rgb(223, 226, 223));
   }
 
@@ -38,3 +41,26 @@
     border-radius: 5px;
     margin-bottom: 20px;*/
   }
+
+  .player {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    left: 10px;
+    bottom: 50%;
+    background-color: red;
+}
+.bullet {
+    position: absolute;
+    width: 10px;
+    height: 5px;
+    background-color: yellow;
+}
+.enemy {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    right: 0;
+    bottom: 50%;
+    background-color: green;
+}
