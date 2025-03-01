@@ -17,7 +17,7 @@ function introPage() {
     gameIntro.style.display = 'block';
     gameArea.style.display = 'none';
     gameEnd.style.display = 'none';
-    stats.style.display = 'none';
+    //stats.style.display = 'block';
   }
   
   // run the game when start button is pressed
@@ -79,8 +79,6 @@ function timeGame(){
                     checkCollisionEnemy(player, enemy);
                 });
 
-                
-
 
                 if (bulletX > window.innerWidth) {
                     bullet.remove()
@@ -105,11 +103,11 @@ function timeGame(){
                     enemy.remove();
                     clearInterval(enemyInterval);
                 } else {
-                    enemy.style.right = parseInt(enemy.style.right) + 3 + "px";
+                    enemy.style.right = parseInt(enemy.style.right) + 10 + "px";
                 }
             }, 50);
             
-            setTimeout(spawnEnemy, Math.random() * 2000 + 1000);
+            setTimeout(spawnEnemy, Math.random() * 200 + 100);
         }
         
         spawnEnemy();
@@ -150,17 +148,25 @@ function timeGame(){
   function endGame() {
     gameArea.style.display = 'none';
     gameEnd.style.display = 'block';
-    stats.style.display = 'block';
-    clearInterval(intervalTimer);
+    //stats.style.display = 'block';
+    document.getElementById('timer').innerText='Time elapsed:'+min+':'+sec
+    
+
   }
   
   // restart game when the button restart is pressed
   restartButton.addEventListener('click', () => {
     gameEnd.style.display = 'none';
     gameArea.style.display = 'block';
-    clearInterval(intervalTimer);
     var sec = 0;
     var min = 0;
+    intervalTimer = setInterval(timeGame, 1000)
+    
+    document.querySelectorAll(".enemy").forEach(enemy => enemy.remove());
+    //document.getElementById("score").innerText = "Score: " + score;
+    //document.getElementById("lives").innerText = "Lives: " + lives;
+    //spawnEnemy();
+
   
     // here will be the game restarted
   });
