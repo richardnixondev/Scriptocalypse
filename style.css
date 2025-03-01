@@ -1,8 +1,14 @@
 #gameArea {
     position: relative;
-    width: 100vw;
+    /*width: 100vw;*/
     height: 100vh;
     background: radial-gradient(rgb(230, 231, 230), rgb(223, 226, 223));
+    padding: 20px 0px;
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+
+
   }
 
   body {
