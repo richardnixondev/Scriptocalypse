@@ -5,7 +5,10 @@ const player = document.getElementById('player');
 const gameEnd = document.getElementById('game-end');
 const startButton = document.getElementById('start-button');
 const restartButton = document.getElementById('restart-button');
-const stats = document.getElementById('stats');
+const score = document.getElementById('score');
+var sec = 0;
+var min = 0;
+var intervalTimer;
 
 // Setup  Game Intro state
 function introPage() {
@@ -22,6 +25,17 @@ function startGame() {
     gameArea.style.display = 'block';
     gameEnd.style.display = 'none';   
     stats.style.display = 'block';
+    intervalTimer = setInterval(timeGame,1000)
+
+     function timeGame(){
+        sec++
+        if(sec==60){
+            min++
+            sec=0
+        }
+        document.getElementById('timer').innerText='Time elapsed:'+min+':'+sec
+    };
+
   
     // here will run the game
     let playerY = window.innerHeight / 2 - 25;
@@ -47,15 +61,23 @@ function startGame() {
             
             let bulletInterval = setInterval(() => {
                 let bulletX = bullet.offsetLeft;
+
+                let checkShoot = document.querySelectorAll(".enemy");
+                checkShoot.forEach(enemy => {
+                    checkCollision(bullet, enemy);
+                });
+
+
                 if (bulletX > window.innerWidth) {
-                    bullet.remove();
+                    bullet.remove()
                     clearInterval(bulletInterval);
                 } else {
-                    bullet.style.left = bulletX + 10 + "px";
+    
+                   bullet.style.left = bulletX + 10 + "px";
                 }
             }, 20);
         }
-
+       
         function spawnEnemy() {
             const enemy = document.createElement("div");
             enemy.classList.add("enemy");
@@ -69,7 +91,7 @@ function startGame() {
                     enemy.remove();
                     clearInterval(enemyInterval);
                 } else {
-                    enemy.style.right = parseInt(enemy.style.right) + 5 + "px";
+                    enemy.style.right = parseInt(enemy.style.right) + 3 + "px";
                 }
             }, 50);
             
@@ -77,26 +99,44 @@ function startGame() {
         }
         
         spawnEnemy();
-      });
+
+        function checkCollision(bullet, enemy) {
+            if (bullet.offsetLeft < enemy.offsetLeft + enemy.offsetWidth &&
+                bullet.offsetLeft + bullet.offsetWidth > enemy.offsetLeft &&
+                bullet.offsetTop < enemy.offsetTop + enemy.offsetHeight &&
+                bullet.offsetTop + bullet.offsetHeight > enemy.offsetTop) {
+                    
+
+                bullet.remove();
+                enemy.remove();
+                score.innerText ++;
+
+
+            }
+        }
+
+  });
 }
   // Setup End game state
   function endGame() {
     gameArea.style.display = 'none';
     gameEnd.style.display = 'block';
+    stats.style.display = 'block';
+    clearInterval(intervalTimer);
   }
   
   // restart game when the button restart is pressed
   restartButton.addEventListener('click', () => {
     gameEnd.style.display = 'none';
     gameArea.style.display = 'block';
+    clearInterval(intervalTimer);
+    var sec = 0;
+    var min = 0;
+    document.getElementById('timer').innerText='Time elapsed: 00:00'
   
     // here will be the game restarted
     startGame();
   });
-  
-
-
-  
   
   //Start the inicial function introPage() and startGame();
   introPage();
