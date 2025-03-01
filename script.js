@@ -8,7 +8,7 @@ const restartButton = document.getElementById('restart-button');
 const stats = document.getElementById('stats');
 
 // Setup  Game Intro state
-function initializePage() {
+function introPage() {
     gameIntro.style.display = 'block';
     gameArea.style.display = 'none';
     gameEnd.style.display = 'none';
@@ -16,7 +16,7 @@ function initializePage() {
   }
   
   // run the game when start button is pressed
-function setupStartButton() { 
+function startGame() { 
   startButton.addEventListener('click', () => {
     gameIntro.style.display = 'none';
     gameArea.style.display = 'block';
@@ -77,7 +77,7 @@ function setupStartButton() {
         }
         
         spawnEnemy();
-  });
+      });
 }
   // Setup End game state
   function endGame() {
@@ -91,19 +91,13 @@ function setupStartButton() {
     gameArea.style.display = 'block';
   
     // here will be the game restarted
-    setupStartButton();
+    startGame();
   });
   
 
+
   
-  function startGame() {
-    console.log('Game Running!');
-  }
   
-  function restartGame() {
-    console.log('Game Restarted!');
-  }
-  
-  //Start the inicial function initializePage() and setupStartButton();
-  initializePage();
-  setupStartButton();
+  //Start the inicial function introPage() and startGame();
+  introPage();
+  startGame();
