@@ -6,9 +6,11 @@ const gameEnd = document.getElementById('game-end');
 const startButton = document.getElementById('start-button');
 const restartButton = document.getElementById('restart-button');
 const score = document.getElementById('score');
+//const lives = document.getElementById('lives');
 var sec = 0;
 var min = 0;
 var intervalTimer;
+lives = 3;
 
 // Setup  Game Intro state
 function introPage() {
@@ -27,13 +29,18 @@ function startGame() {
     stats.style.display = 'block';
     intervalTimer = setInterval(timeGame,1000)
 
-     function timeGame(){
-        sec++
-        if(sec==60){
-            min++
-            sec=0
-        }
-        document.getElementById('timer').innerText='Time elapsed:'+min+':'+sec
+
+
+//Game Time
+function timeGame(){
+    sec++
+
+    sec = sec < 10 ? "0" + sec : sec;
+    if(sec==60){
+        min++
+        sec=0
+    }
+    document.getElementById('timer').innerText='Time elapsed:'+min+':'+sec
     };
 
   
@@ -66,6 +73,13 @@ function startGame() {
                 checkShoot.forEach(enemy => {
                     checkCollision(bullet, enemy);
                 });
+
+                let checkPlayerColision = document.querySelectorAll(".enemy");
+                checkPlayerColision.forEach(enemy => {
+                    checkCollisionEnemy(player, enemy);
+                });
+
+                
 
 
                 if (bulletX > window.innerWidth) {
@@ -114,6 +128,21 @@ function startGame() {
 
             }
         }
+        function checkCollisionEnemy(player, enemy) {
+            if (player.offsetLeft < enemy.offsetLeft + enemy.offsetWidth &&
+                player.offsetLeft + player.offsetWidth > enemy.offsetLeft &&
+                player.offsetTop < enemy.offsetTop + enemy.offsetHeight &&
+                player.offsetTop + player.offsetHeight > enemy.offsetTop) {
+                
+                    
+                enemy.remove();
+                lives -= 1;
+                document.getElementById("lives").innerText = lives;
+                
+            } else if (lives === 0){
+                endGame();
+            }
+        }
 
   });
 }
@@ -132,10 +161,8 @@ function startGame() {
     clearInterval(intervalTimer);
     var sec = 0;
     var min = 0;
-    document.getElementById('timer').innerText='Time elapsed: 00:00'
   
     // here will be the game restarted
-    startGame();
   });
   
   //Start the inicial function introPage() and startGame();
