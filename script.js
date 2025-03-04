@@ -7,9 +7,11 @@ const restartButton = document.getElementById('restart-button');
 const scoreElement = document.getElementById('score');
 const livesElement = document.getElementById('lives');
 const timerElement = document.getElementById('timer');
-const finalScoreElement = document.getElementById('final-score'); // Novo elemento para pontuação final
-const finalTimeElement = document.getElementById('final-time'); // Novo elemento para tempo final
+const finalScoreElement = document.getElementById('final-score');
+const finalTimeElement = document.getElementById('final-time');
 
+
+let enemyInterval;
 let sec = 0;
 let min = 0;
 let intervalTimer;
@@ -105,7 +107,7 @@ function spawnEnemy() {
     enemy.style.right = "0px";
     enemy.style.bottom = Math.random() * (window.innerHeight - 50) + "px";
 
-    let enemyInterval = setInterval(() => {
+    enemyInterval = setInterval(() => {
         let enemyX = enemy.offsetLeft;
         if (enemyX < 0) {
             enemy.remove();
@@ -174,9 +176,11 @@ restartButton.addEventListener('click', () => {
     score = 0;
     scoreElement.innerText = score;
     livesElement.innerText = lives;
-    clearInterval(intervalTimer);
+    clearInterval(intervalTimer); // clear time interval
+    clearInterval(enemyInterval); // clear enemy interval
+    document.querySelectorAll(".enemy").forEach(enemy => enemy.remove()); //make sure have no enemys and also fix the bug of have a ghost enemy after restart
     intervalTimer = setInterval(timeGame, 1000);
-    spawnEnemy();
+    //spawnEnemy();
 });
 
 // Start the initial function introPage() and startGame();
