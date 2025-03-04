@@ -9,9 +9,12 @@ const livesElement = document.getElementById('lives');
 const timerElement = document.getElementById('timer');
 const finalScoreElement = document.getElementById('final-score');
 const finalTimeElement = document.getElementById('final-time');
+const gameAreaHeight = window.innerHeight * 0.8;
+const gameAreaWidth = window.innerWidth * 0.8;
 
 
 let enemyInterval;
+//let bulletInterval;
 let sec = 0;
 let min = 0;
 let intervalTimer;
@@ -29,6 +32,10 @@ function introPage() {
 // Run the game when start button is pressed
 function startGame() {
     startButton.addEventListener('click', () => {
+        gameArea.style.width = gameAreaWidth + "px";
+        gameArea.style.height = gameAreaHeight + "px";
+        gameArea.style.position = "relative";
+        gameArea.style.overflow = "hidden";
         gameIntro.style.display = 'none';
         gameArea.style.display = 'block';
         gameEnd.style.display = 'none';
@@ -57,11 +64,11 @@ function timeGame() {
 }
 
 // Player movement and shooting
-let playerY = window.innerHeight / 2 - 25;
+let playerY = gameAreaHeight / 2 - 25;
 player.style.bottom = playerY + "px";
 
 document.addEventListener("keydown", (e) => {
-    if (e.key === "ArrowUp" && playerY < window.innerHeight - 60) {
+    if (e.key === "ArrowUp" && playerY < gameAreaHeight - 60) {
         playerY += 40;
     } else if (e.key === "ArrowDown" && playerY > 0) {
         playerY -= 40;
@@ -91,7 +98,7 @@ function shoot() {
             checkCollisionEnemy(player, enemy);
         });
 
-        if (bulletX > window.innerWidth) {
+        if (bulletX > gameAreaWidth) {
             bullet.remove();
             clearInterval(bulletInterval);
         } else {
@@ -105,7 +112,7 @@ function spawnEnemy() {
     enemy.classList.add("enemy");
     gameArea.appendChild(enemy);
     enemy.style.right = "0px";
-    enemy.style.bottom = Math.random() * (window.innerHeight - 50) + "px";
+    enemy.style.bottom = Math.random() * (gameAreaHeight - 50) + "px";
 
     enemyInterval = setInterval(() => {
         let enemyX = enemy.offsetLeft;
