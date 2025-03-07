@@ -1,6 +1,6 @@
 # Scriptocalypse
 
-[Click here to see deployed game]([http://github.com](https://richardnixondev.github.io/Scriptocalypse/)
+[Click here to see deployed game]([http://github.com](https://richardnixondev.github.io/Scriptocalypse/])
 
 ## Description
 Scriptocalypse, set in a zombie apocalypse scenario in the year 2666, the objective is to survive the attack of all groups of zombies for 3 minutes. The game ends when the clock resets, your score will be based on the amount of destruction you managed to cause.
