@@ -11,7 +11,7 @@ Scriptocalypse, set in a zombie apocalypse scenario in the year 2666, the object
 
 - The game must have the ability to start and be restarted at the end.
 
-- The game needs to have a logic of losing and winning.
+- The game needs to have a logic of losing or winning.
 
 - The game needs to be versioned on github.
 
@@ -36,17 +36,34 @@ Scriptocalypse, set in a zombie apocalypse scenario in the year 2666, the object
 
 
 ## Data structure
-_List of classes and methods_
+-  introPage(): Sets up and displays the game’s intro screen, hiding other sections.
+
+-  startGame(): Starts the game when the "Start" button is clicked, setting up the game area, resetting variables, and starting the timer.
+
+-  timeGame(): Updates the elapsed game time every second.
+
+-  shoot(): Creates a bullet when the player shoots and checks for collisions with enemies.
+
+-  spawnEnemy(): Continuously spawns enemies and moves them across the screen.
+
+-  checkCollision(bullet, enemy): Detects if a bullet collides with an enemy, removing both and increasing the score if a hit is detected.
+
+-  checkCollisionEnemy(player, enemy): Checks if an enemy collides with the player. If so, it reduces the player's lives and determines if the game should end.
+
+-  endGame(): Ends the game when the player runs out of lives, displaying the "Game Over" screen and clearing game elements.
 
 
 ## States y States Transitions
- - Start Screen
+-  Start Screen
 -  Game Screen
 -  Game Over Screen
 
 
 ## Task
-_List of tasks in order of priority_
+- [x] MVP
+- [ ] Extras
+
+
 
 
 ## Links
