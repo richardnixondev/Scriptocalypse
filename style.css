@@ -1,72 +1,72 @@
 #gameArea {
-    position: relative;
-    /*width: 100vw;*/
-    height: 100vh;
-    background: radial-gradient(rgb(230, 231, 230), rgb(223, 226, 223));
-    padding: 20px 0px;
-    display: flex;
-    justify-content: center;
-    box-sizing: border-box;
+  position: relative;
+  /*width: 100vw;*/
+  height: 100vh;
+  background: radial-gradient(rgb(230, 231, 230), rgb(223, 226, 223));
+  padding: 20px 0px;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
 
 
-  }
-
-  body {
-    margin: 0;
-    padding: 0;
-    text-align: center;
-    box-sizing: border-box;
-  }
-  
-  #game-intro::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url(./img/background-start.jpg);
-    background-size: cover;
-    background-position: center;
-    opacity: 0.7; 
-    z-index: -1;
 }
-  
-  .game-intro p {
-    font-size: 18px;
-    font-family: 'Verdana';
-  }
-  
-  body button {
-    font-size: 30px;
-    background-color: #870007;
-    color: #fff;
-    padding: 20px 40px;
-    border: 0;
-    box-shadow: 0;
-    border-radius: 5px;
-    margin-bottom: 20px;*/
-  }
 
-  .player {
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    left: 10px;
-    bottom: 50%;
-    background-color: red;
+body {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+#game-intro::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url(./images/background-start.jpg);
+  background-size: cover;
+  background-position: center;
+  opacity: 0.7; 
+  z-index: -1;
+}
+
+.game-intro p {
+  font-size: 18px;
+  font-family: 'Verdana';
+}
+
+body button {
+  font-size: 30px;
+  background-color: #870007;
+  color: #fff;
+  padding: 20px 40px;
+  border: 0;
+  box-shadow: 0;
+  border-radius: 5px;
+  margin-bottom: 20px;*/
+}
+
+.player {
+  position: absolute;
+  left: 20px;
+  bottom: 5 0%;
+  width: 75px; 
+  height: auto;
 }
 .bullet {
-    position: absolute;
-    width: 10px;
-    height: 5px;
-    background-color:black;
+  position: absolute;
+  width: 10px;
+  height: 5px;
+  background-color:black;
 }
 .enemy {
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    right: 0;
-    bottom: 50%;
-    background-color: green;
+  position: absolute;
+  width: 75px;
+  height: auto
+  right: 0;
+  bottom: 50%;
+  transform: scaleX(-1);
+
 }
