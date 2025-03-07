@@ -11,6 +11,7 @@ const finalScoreElement = document.getElementById('final-score');
 const finalTimeElement = document.getElementById('final-time');
 const gameAreaHeight = window.innerHeight * 0.8;
 const gameAreaWidth = window.innerWidth * 0.8;
+const stats = document.getElementById('stats');
 
 
 let enemyInterval;
@@ -20,6 +21,10 @@ let min = 0;
 let intervalTimer;
 let lives = 3;
 let score = 0;
+
+
+
+// Set background image
 
 // Setup Game Intro state
 function introPage() {
@@ -50,6 +55,7 @@ function startGame() {
         intervalTimer = setInterval(timeGame, 1000);
         spawnEnemy();
     });
+    
 }
 
 // Game Time
@@ -105,10 +111,14 @@ function shoot() {
             bullet.style.left = bulletX + 10 + "px";
         }
     }, 20);
+    
+    new Audio("sounds/shoot.mp3").play();
 }
 
+
 function spawnEnemy() {
-    const enemy = document.createElement("div");
+    const enemy = document.createElement("img");
+    enemy.src = "images/zombie.gif";
     enemy.classList.add("enemy");
     gameArea.appendChild(enemy);
     enemy.style.right = "0px";
@@ -166,6 +176,7 @@ function endGame() {
     // stats on Game Over screen
     finalScoreElement.innerText = score; 
     finalTimeElement.innerText = 'Time elapsed: ' + min + ':' + sec;
+    new Audio("sounds/gameover.mp3").play();
 
     // Remove enemys and bullets
     document.querySelectorAll(".enemy").forEach(enemy => enemy.remove());
