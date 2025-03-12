@@ -49,6 +49,7 @@ Scriptocalypse, set in a zombie apocalypse scenario in the year 2666, the object
 -  checkCollision(bullet, enemy): Detects if a bullet collides with an enemy, removing both and increasing the score if a hit is detected.
 
 -  checkCollisionEnemy(player, enemy): Checks if an enemy collides with the player. If so, it reduces the player's lives and determines if the game should end.
+-  checkPlayerCollisions(): Checks if an Player collides with the enemy every 100ms.
 
 -  endGame(): Ends the game when the player runs out of lives, displaying the "Game Over" screen and clearing game elements.
 
