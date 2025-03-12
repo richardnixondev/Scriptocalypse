@@ -11,6 +11,7 @@ const finalTimeElement = document.getElementById('final-time');
 const gameAreaHeight = window.innerHeight * 0.8;
 const gameAreaWidth = window.innerWidth * 0.8;
 const stats = document.getElementById('stats');
+const volumeSlider = document.getElementById('volume');
 
 let player = document.createElement("img");
 let enemyInterval;
@@ -21,7 +22,7 @@ let intervalTimer;
 let lives = 3;
 let score = 0;
 let playerY = gameAreaHeight / 2 - 25;
-
+let gameVolume = 0.4;
 
 
 // Set background image
@@ -56,7 +57,7 @@ function startGame() {
         spawnPlayer();
         spawnEnemy();
     });
-    
+
 }
 
 // Game Time
@@ -68,10 +69,6 @@ function timeGame() {
         sec = 0;
     }
     timerElement.innerText = 'Time elapsed: ' + min + ':' + sec;
-}
-
-class Player{
-
 }
 
 function spawnPlayer() {
@@ -103,6 +100,16 @@ function playerMove(){
 }
 
 
+volumeSlider.addEventListener('input', (event) => {
+    gameVolume = event.target.value;
+});
+
+function playSound(src) {
+    const sound = new Audio(src);
+    sound.volume = gameVolume;
+    sound.play();
+}
+
 function shoot() {
     const bullet = document.createElement("div");
     bullet.classList.add("bullet");
@@ -110,8 +117,6 @@ function shoot() {
     bullet.style.left = "60px";
     bullet.style.bottom = playerY + 20 + "px";
     
-    let shootingSound = new Audio("sounds/shoot.mp3");
-    shootingSound.volume = 0.2
     let bulletInterval = setInterval(() => {
         let bulletX = bullet.offsetLeft;
 
@@ -128,7 +133,7 @@ function shoot() {
         }
     }, 20);
 
-    shootingSound.play();
+    playSound("sounds/shoot.mp3");
 }
 
 function spawnEnemy() {
@@ -165,6 +170,14 @@ function checkCollision(bullet, enemy) {
     }
 }
 
+function checkPlayerCollisions(){
+    let checkPlayerColision = document.querySelectorAll(".enemy");
+    checkPlayerColision.forEach(enemy => {
+        checkCollisionEnemy(player, enemy);
+    });
+}
+
+
 function checkCollisionEnemy(player, enemy) {
     if (player.offsetLeft < enemy.offsetLeft + enemy.offsetWidth &&
         player.offsetLeft + player.offsetWidth > enemy.offsetLeft &&
@@ -177,6 +190,8 @@ function checkCollisionEnemy(player, enemy) {
 
         if (lives === 0) {
             endGame();
+        } else {
+            playSound("sounds/lostlife.mp3");
         }
     }
 }
@@ -191,7 +206,8 @@ function endGame() {
     // stats on Game Over screen
     finalScoreElement.innerText = score;
     finalTimeElement.innerText = 'Time elapsed: ' + min + ':' + sec;
-    new Audio("sounds/gameover.mp3").volume(0.5).play();
+
+    playSound("sounds/gameover.mp3");
 
     // Remove enemys and bullets
     document.querySelectorAll(".enemy").forEach(enemy => enemy.remove());
