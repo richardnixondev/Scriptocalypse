@@ -1,6 +1,5 @@
 const gameIntro = document.getElementById('game-intro');
 const gameArea = document.getElementById("gameArea");
-const player = document.getElementById('player');
 const gameEnd = document.getElementById('game-end');
 const startButton = document.getElementById('start-button');
 const restartButton = document.getElementById('restart-button');
@@ -14,7 +13,7 @@ const gameAreaWidth = window.innerWidth * 0.8;
 const stats = document.getElementById('stats');
 const volumeSlider = document.getElementById('volume');
 
-
+let player = document.createElement("img");
 let enemyInterval;
 //let bulletInterval;
 let sec = 0;
@@ -22,7 +21,9 @@ let min = 0;
 let intervalTimer;
 let lives = 3;
 let score = 0;
+let playerY = gameAreaHeight / 2 - 25;
 let gameVolume = 0.4;
+
 
 // Set background image
 
@@ -53,7 +54,7 @@ function startGame() {
         livesElement.innerText = lives;
         clearInterval(intervalTimer);
         intervalTimer = setInterval(timeGame, 1000);
-        setInterval(checkPlayerCollisions, 100);
+        spawnPlayer();
         spawnEnemy();
     });
 
@@ -70,11 +71,23 @@ function timeGame() {
     timerElement.innerText = 'Time elapsed: ' + min + ':' + sec;
 }
 
-// Player movement and shooting
-let playerY = gameAreaHeight / 2 - 25;
-player.style.bottom = playerY + "px";
+function spawnPlayer() {
+    player.src = "images/shooter.gif";
+    player.classList.add("player");
+    gameArea.appendChild(player);
+    playerMove();   
+    // Player movement and shooting
+    player.style.bottom = playerY + "px";
+        let bulletInterval = setInterval(() => {
+        let checkPlayerColision = document.querySelectorAll(".enemy");
+        checkPlayerColision.forEach(enemy => {
+                checkCollisionEnemy(player, enemy);
+        });
+    },20);   
+}
 
-document.addEventListener("keydown", (e) => {
+function playerMove(){
+    document.addEventListener("keydown", (e) => {
     if (e.key === "ArrowUp" && playerY < gameAreaHeight - 60) {
         playerY += 40;
     } else if (e.key === "ArrowDown" && playerY > 0) {
@@ -84,6 +97,8 @@ document.addEventListener("keydown", (e) => {
     }
     player.style.bottom = playerY + "px";
 });
+}
+
 
 volumeSlider.addEventListener('input', (event) => {
     gameVolume = event.target.value;
@@ -101,7 +116,7 @@ function shoot() {
     gameArea.appendChild(bullet);
     bullet.style.left = "60px";
     bullet.style.bottom = playerY + 20 + "px";
-
+    
     let bulletInterval = setInterval(() => {
         let bulletX = bullet.offsetLeft;
 
@@ -120,7 +135,6 @@ function shoot() {
 
     playSound("sounds/shoot.mp3");
 }
-
 
 function spawnEnemy() {
     const enemy = document.createElement("img");
@@ -192,6 +206,7 @@ function endGame() {
     // stats on Game Over screen
     finalScoreElement.innerText = score;
     finalTimeElement.innerText = 'Time elapsed: ' + min + ':' + sec;
+
     playSound("sounds/gameover.mp3");
 
     // Remove enemys and bullets
