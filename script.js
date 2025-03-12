@@ -12,6 +12,7 @@ const finalTimeElement = document.getElementById('final-time');
 const gameAreaHeight = window.innerHeight * 0.8;
 const gameAreaWidth = window.innerWidth * 0.8;
 const stats = document.getElementById('stats');
+const volumeSlider = document.getElementById('volume');
 
 
 let enemyInterval;
@@ -21,8 +22,7 @@ let min = 0;
 let intervalTimer;
 let lives = 3;
 let score = 0;
-
-
+let gameVolume = 0.4;
 
 // Set background image
 
@@ -56,7 +56,7 @@ function startGame() {
         setInterval(checkPlayerCollisions, 100);
         spawnEnemy();
     });
-    
+
 }
 
 // Game Time
@@ -85,6 +85,16 @@ document.addEventListener("keydown", (e) => {
     player.style.bottom = playerY + "px";
 });
 
+volumeSlider.addEventListener('input', (event) => {
+    gameVolume = event.target.value;
+});
+
+function playSound(src) {
+    const sound = new Audio(src);
+    sound.volume = gameVolume;
+    sound.play();
+}
+
 function shoot() {
     const bullet = document.createElement("div");
     bullet.classList.add("bullet");
@@ -107,8 +117,8 @@ function shoot() {
             bullet.style.left = bulletX + 10 + "px";
         }
     }, 20);
-    
-    new Audio("sounds/shoot.mp3").play();
+
+    playSound("sounds/shoot.mp3");
 }
 
 
@@ -166,6 +176,8 @@ function checkCollisionEnemy(player, enemy) {
 
         if (lives === 0) {
             endGame();
+        } else {
+            playSound("sounds/lostlife.mp3");
         }
     }
 }
@@ -178,9 +190,9 @@ function endGame() {
     stats.style.display = 'block';
 
     // stats on Game Over screen
-    finalScoreElement.innerText = score; 
+    finalScoreElement.innerText = score;
     finalTimeElement.innerText = 'Time elapsed: ' + min + ':' + sec;
-    new Audio("sounds/gameover.mp3").play();
+    playSound("sounds/gameover.mp3");
 
     // Remove enemys and bullets
     document.querySelectorAll(".enemy").forEach(enemy => enemy.remove());
