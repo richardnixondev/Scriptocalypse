@@ -53,6 +53,7 @@ function startGame() {
         livesElement.innerText = lives;
         clearInterval(intervalTimer);
         intervalTimer = setInterval(timeGame, 1000);
+        setInterval(checkPlayerCollisions, 100);
         spawnEnemy();
     });
     
@@ -97,11 +98,6 @@ function shoot() {
         let checkShoot = document.querySelectorAll(".enemy");
         checkShoot.forEach(enemy => {
             checkCollision(bullet, enemy);
-        });
-
-        let checkPlayerColision = document.querySelectorAll(".enemy");
-        checkPlayerColision.forEach(enemy => {
-            checkCollisionEnemy(player, enemy);
         });
 
         if (bulletX > gameAreaWidth) {
@@ -149,6 +145,14 @@ function checkCollision(bullet, enemy) {
         scoreElement.innerText = score;
     }
 }
+
+function checkPlayerCollisions(){
+    let checkPlayerColision = document.querySelectorAll(".enemy");
+    checkPlayerColision.forEach(enemy => {
+        checkCollisionEnemy(player, enemy);
+    });
+}
+
 
 function checkCollisionEnemy(player, enemy) {
     if (player.offsetLeft < enemy.offsetLeft + enemy.offsetWidth &&
